@@ -1,0 +1,6 @@
+#!/bin/bash
+FILE_PATH=$1
+DESTINATION_PATH=$2
+
+cp "$FILE_PATH" "$DESTINATION_PATH"
+
