@@ -28,7 +28,7 @@ log_message(f"=== GET ALL STUDENTS ===", results_file)
 response = requests.get(f"{BASE_URL}/students")
 log_result(response, results_file)
 
-update_age_target_customer_id =-1
+update_age_target_customer_id = -1
 update_target_customer_id = -1
 delete_target_customer_id = -1
 for i in range(3):
@@ -40,11 +40,11 @@ for i in range(3):
     log_message(f"=== CREATE STUDENT ===", results_file)
     response = requests.post(f"{BASE_URL}/student", json=new_student)
     if i == 1:
-        update_age_target_customer_id = response.json()["student"]["id"]
+        update_age_target_customer_id = response.json()["id"]
     if i == 2:
-        update_target_customer_id = response.json()["student"]["id"]
+        update_target_customer_id = response.json()["id"]
     if i == 0:
-        delete_target_customer_id = response.json()["student"]["id"]
+        delete_target_customer_id = response.json()["id"]
     log_result(response, results_file)
 
 log_message(f"=== GET ALL STUDENTS ===", results_file)
