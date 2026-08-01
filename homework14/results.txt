@@ -1,0 +1,61 @@
+Start performing test_request.py
+=== GET ALL STUDENTS ===
+Method: GET
+URL: http://127.0.0.1:5000/students
+Status Code: 200
+Response: []
+=== CREATE STUDENT ===
+Method: POST
+URL: http://127.0.0.1:5000/student
+Status Code: 201
+Response: {'age': '18', 'id': '1', 'name': 'Jason', 'surname': 'Harding'}
+=== CREATE STUDENT ===
+Method: POST
+URL: http://127.0.0.1:5000/student
+Status Code: 201
+Response: {'age': '28', 'id': '2', 'name': 'Zachary', 'surname': 'Grant'}
+=== CREATE STUDENT ===
+Method: POST
+URL: http://127.0.0.1:5000/student
+Status Code: 201
+Response: {'age': '20', 'id': '3', 'name': 'Andrea', 'surname': 'Hernandez'}
+=== GET ALL STUDENTS ===
+Method: GET
+URL: http://127.0.0.1:5000/students
+Status Code: 200
+Response: [{'age': 18, 'id': 1, 'name': 'Jason', 'surname': 'Harding'}, {'age': 28, 'id': 2, 'name': 'Zachary', 'surname': 'Grant'}, {'age': 20, 'id': 3, 'name': 'Andrea', 'surname': 'Hernandez'}]
+=== UPDATE AGE OF 2 STUDENTS ===
+Method: PATCH
+URL: http://127.0.0.1:5000/student/2
+Status Code: 200
+Response: {'age': '26', 'id': '2', 'name': 'Zachary', 'surname': 'Grant'}
+=== GET 2 STUDENT ===
+Method: GET
+URL: http://127.0.0.1:5000/student/2
+Status Code: 200
+Response: {'age': 26, 'id': 2, 'name': 'Zachary', 'surname': 'Grant'}
+=== UPDATE AGE OF 3 STUDENTS ===
+Method: PUT
+URL: http://127.0.0.1:5000/student/3
+Status Code: 200
+Response: {'age': '24', 'id': '3', 'name': 'Scott', 'surname': 'Kim'}
+=== GET 3 STUDENT ===
+Method: GET
+URL: http://127.0.0.1:5000/student/3
+Status Code: 200
+Response: {'age': 24, 'id': 3, 'name': 'Scott', 'surname': 'Kim'}
+=== GET ALL STUDENTS ===
+Method: GET
+URL: http://127.0.0.1:5000/students
+Status Code: 200
+Response: [{'age': 18, 'id': 1, 'name': 'Jason', 'surname': 'Harding'}, {'age': 26, 'id': 2, 'name': 'Zachary', 'surname': 'Grant'}, {'age': 24, 'id': 3, 'name': 'Scott', 'surname': 'Kim'}]
+=== DELETE 1 STUDENT ===
+Method: DELETE
+URL: http://127.0.0.1:5000/student/1
+Status Code: 200
+Response: [{'age': '26', 'id': '2', 'name': 'Zachary', 'surname': 'Grant'}, {'age': '24', 'id': '3', 'name': 'Scott', 'surname': 'Kim'}]
+=== GET ALL STUDENTS ===
+Method: GET
+URL: http://127.0.0.1:5000/students
+Status Code: 200
+Response: [{'age': 26, 'id': 2, 'name': 'Zachary', 'surname': 'Grant'}, {'age': 24, 'id': 3, 'name': 'Scott', 'surname': 'Kim'}]
