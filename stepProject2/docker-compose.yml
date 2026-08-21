@@ -1,0 +1,33 @@
+services:
+  jenkins-controller:
+    image: jenkins/jenkins:lts
+    container_name: jenkins-controller
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - jenkins-net
+
+  jenkins-agent:
+    build:
+      context: ./jenkins-agent
+      dockerfile: Dockerfile
+    container_name: jenkins-agent
+    user: root
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - JENKINS_URL=http://jenkins-controller:8080
+      - JENKINS_AGENT_NAME=build-node-01
+      - JENKINS_SECRET=8b0a9a7344c34cb408ae36cc30e619a19ac5f1676090d21dbf0999b02bafd226
+      - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
+    networks:
+      - jenkins-net
+
+networks:
+  jenkins-net:
+
+volumes:
+  jenkins_home:
