@@ -1,0 +1,57 @@
+pipeline {
+    agent {
+        label 'build-node-01'
+    }
+    environment {
+        APP_NAME = "node-app"
+        DOCKER_IMAGE = "node-app:latest"
+    }
+
+    stages {
+        stage('Check Docker') {
+            steps {
+                sh 'whoami'
+                sh 'docker --version'
+                sh 'docker ps'
+            }
+        }
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://gitlab.com/dan-it/groups/devops_soft.git',
+                    credentialsId: 'gitlab-creds'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'echo "Building $APP_NAME..."'
+                sh 'docker build -t $APP_NAME ./forStep2'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'echo "Running tests..."'
+                sh 'docker run --rm $APP_NAME test'
+            }
+        }
+    }
+
+    post {
+        success {
+            withCredentials([usernamePassword(credentialsId: 'dockerhub-creds',
+                                             usernameVariable: 'DOCKER_USER',
+                                             passwordVariable: 'DOCKER_PASS')]) {
+                sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                sh 'docker tag $APP_NAME $DOCKER_USER/devops_soft:latest'
+                sh 'docker push $DOCKER_USER/devops_soft:latest'
+            }
+            echo 'Pipeline completed successfully and image pushed to Docker Hub!'
+        }
+        failure {
+            echo 'Pipeline failed! Check logs for details.'
+        }
+    }
+}
